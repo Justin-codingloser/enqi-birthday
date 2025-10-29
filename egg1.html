@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>egg1</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+    <div>
+        <h1>Egg 1 Question</h1>
+        <p>What's the most lovely animal in the world?</p>
+        <input type="text" name="answer" />
+        <button name="submit">Submit</button>
+    </div>
+    <button name="back">back</button>
+
+    <script>
+        const backBtn = document.querySelector('button[name="back"]');
+
+        if (backBtn) {
+            backBtn.addEventListener('click', function() {
+                window.location.href = "main.html";
+            });
+        } else {
+            console.warn('Back button not found');
+        }
+
+        const submitBtn = document.querySelector('button[name="submit"]');
+        if( submitBtn ) {
+            submitBtn.addEventListener('click', function() {
+                const answerInput = document.querySelector('input[name="answer"]');
+                const answer = answerInput ? answerInput.value.trim().toLowerCase() : '';
+                if (answer === 'cat' || answer === 'kitty' || answer === "貓咪" || answer === "貓") {
+                    alert("Key 1");
+                } else {
+                    alert("Nooooo...Try again.");
+                }
+            });
+        } else {
+            console.warn('Submit button not found');
+        }
+    </script>
+</body>
+
+</html>

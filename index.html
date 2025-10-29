@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Enqi's Birthday</title>
+    <!-- Optional stylesheet (adjust path if needed) -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+        /* 簡單置中樣式，若有外部 stylesheet 可移到那裡 */
+        .container { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        input[name="username"] { padding: 8px; font-size: 1rem; }
+        button[name="submit"] { padding: 8px 12px; font-size: 1rem; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <h1>🎂 Happy Birthday Surprise 🎂</h1>
+            <div class="container">
+                <h2>How do I call you?</h2>
+                <input type="text" name="username" />
+                <button name="submit">Submit</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Inline script: 修正變數與事件綁定 -->
+    <script>
+        const name = "淇淇咪";
+        const submitBtn = document.querySelector('button[name="submit"]');
+
+        if (submitBtn) {
+            submitBtn.addEventListener('click', function() {
+                const usernameInput = document.querySelector('input[name="username"]');
+                const username = usernameInput ? usernameInput.value.trim() : '';
+                if (username.toLowerCase() === name.toLowerCase()) {
+                    setTimeout(alert("!!!!You're right!!!!"),1500);
+                    window.location.href = "main.html";
+                } else {
+                    alert("No... That's not how I call you.");
+                }
+            });
+        } else {
+            console.warn('Submit button not found');
+        }
+    </script>
+</body>
+</html>

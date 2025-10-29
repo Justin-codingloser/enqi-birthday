@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Enqi's Birthday</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+       
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container">
+    <h1>🎈 Welcome to the Birthday Fun! 🎉</h1>
+    <p>答對3個小問題並解出金鑰 解鎖最後的生日祝福!</p>
+
+    <div class="eggs">
+      <img src="assets/images/egg1 .png" class="egg" id="egg1">
+      <img src="assets/images/egg2 .png" class="egg" id="egg2">
+      <img src="assets/images/egg3 .png" class="egg" id="egg3">
+    </div>
+
+  </div>
+
+    </main>
+        
+    <script>
+        const egg1 = document.getElementById('egg1');
+        const egg2 = document.getElementById('egg2');
+        const egg3 = document.getElementById('egg3');
+        egg1.addEventListener('click', () => {
+            setTimeout(alert("Question 1!"),1500);
+            window.location.href = "egg1.html";
+        });
+        egg2.addEventListener('click', () => {
+            setTimeout(alert("Question 2!"),1500);
+            window.location.href = "egg2.html";
+        });
+        egg3.addEventListener('click', () => {
+            setTimeout(alert("Question 3!"),1500);
+            window.location.href = "egg3.html";
+        });
+    </script>
+</body>
+</html>
