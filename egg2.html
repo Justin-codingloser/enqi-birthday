@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>egg1</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/egg.css" />
 </head>
 <body>
     <div>
-        <h1>Egg 1 Question</h1>
-        <p>What's the most lovely animal in the world?</p>
+        <h1>Egg 2 Question</h1>
+        <p>What's the greatest programming language in the world?</p>
         <input type="text" name="answer" />
         <button name="submit">Submit</button>
     </div>
@@ -31,7 +31,7 @@
             submitBtn.addEventListener('click', function() {
                 const answerInput = document.querySelector('input[name="answer"]');
                 const answer = answerInput ? answerInput.value.trim().toLowerCase() : '';
-                if (answer === 'cat' || answer === 'kitty' || answer === "貓咪" || answer === "貓") {
+                if (answer === 'C++' || answer === 'c++' || answer === "C ++" || answer === "c ++") {
                     alert("Key 1");
                 } else {
                     alert("Nooooo...Try again.");
