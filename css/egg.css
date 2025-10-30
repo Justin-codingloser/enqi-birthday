@@ -1,0 +1,113 @@
+/* 一致化設定 */
+* {
+  box-sizing: border-box;
+  font-family: "Noto Sans TC", "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* 背景與置中 */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+  color: #4a148c;
+}
+
+/* 主要容器卡片 */
+div {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 320px;
+  width: 90%;
+}
+
+/* 標題 */
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+/* 問題文字 */
+p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  color: #6a1b9a;
+}
+
+/* 輸入框 */
+input[name="answer"] {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ce93d8;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  transition: 0.2s;
+}
+
+input[name="answer"]:focus {
+  border-color: #ab47bc;
+  box-shadow: 0 0 5px #ce93d8;
+}
+
+/* 按鈕共用風格 */
+button {
+  background-color: #f06292;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.2s;
+  margin-top: 5px;
+}
+
+button:hover {
+  background-color: #ec407a;
+  transform: scale(1.05);
+}
+
+button[name="back"] {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  background-color: #ba68c8;
+}
+
+button[name="back"]:hover {
+  background-color: #9c27b0;
+}
+
+/* 手機相容性調整 */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  div {
+    padding: 25px 20px;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  button[name="back"] {
+    left: 10px;
+    bottom: 10px;
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+}
