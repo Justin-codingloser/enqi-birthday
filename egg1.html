@@ -40,6 +40,12 @@
         } else {
             console.warn('Submit button not found');
         }
+
+        const answerInput = document.querySelector('input[name="answer"]');
+        
+        answerInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') submitBtn.click();
+        });
     </script>
 </body>
 
