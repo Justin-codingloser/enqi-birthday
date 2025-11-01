@@ -9,7 +9,7 @@
 <body>
     <div>
         <h1>Egg 3 Question</h1>
-        <p>Who's the cuttest girl in the world?</p>
+        <p>Who's the cutest girl in the world?</p>
         <input type="text" name="answer" />
         <button name="submit">Submit</button>
     </div>
@@ -27,11 +27,13 @@
         }
 
         const submitBtn = document.querySelector('button[name="submit"]');
+        const correctAnswers = ['郭恩淇', '恩淇', '淇淇咪', 'enqi', 'angelia', 'me'];
+
         if( submitBtn ) {
             submitBtn.addEventListener('click', function() {
                 const answerInput = document.querySelector('input[name="answer"]');
                 const answer = answerInput ? answerInput.value.trim().toLowerCase() : '';
-                if (answer === '郭恩淇' || answer === '恩淇' || answer === "淇淇咪" || answer === 'enqi' || answer === 'Angelia' || answer === 'Me') {
+                if (correctAnswers.includes(answer)) {
                     alert("CLUE 3:Scytal Cipher");
                 } else {
                     alert("Nooooo...Try again.");
@@ -40,6 +42,12 @@
         } else {
             console.warn('Submit button not found');
         }
+
+        const answerInput = document.querySelector('input[name="answer"]');
+        
+        answerInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') submitBtn.click();
+        });
     </script>
 </body>
 
