@@ -23,21 +23,21 @@
 
     </div>
 
-    <div>
-        <button id="final">Check the final answer</button>
-    </div>
 
     </main>
 
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal">
-            <button class="close-btn" id="closeModal">&times;</button>
-            <h2>輸入你的最終解答 🔍</h2>
-            <input type="text" id="finalAnswer" placeholder="輸入密碼..." />
-            <button id="submitFinal">Submit</button>
-            <p id="finalResult" class="result"></p>
+    <button id="finalAnswerBtn">Enter Final Answer</button>
+
+<div class="final-answer-overlay" id="finalAnswerOverlay">
+    <div class="final-answer-box">
+        <h2>Enter Final Answer</h2>
+        <input type="text" id="finalAnswerInput" placeholder="Type your final answer..." />
+        <div>
+            <button id="submitFinalAnswer">Submit</button>
+            <button id="closeFinalAnswer">Cancel</button>
         </div>
     </div>
+</div>
         
     <script>
         const egg1 = document.getElementById('egg1');
@@ -58,32 +58,32 @@
 
         const correctPassword = "happybirthdaytoyou";
 
-        finalBtn.addEventListener('click', () => {
-            modalOverlay.style.display = "flex";
-            finalAnswer.focus();
+    
+        const overlay = document.getElementById('finalAnswerOverlay');
+        const openBtn = document.getElementById('finalAnswerBtn');
+        const closeBtn = document.getElementById('closeFinalAnswer');
+        const submitBtn = document.getElementById('submitFinalAnswer');
+
+        openBtn.addEventListener('click', () => {
+            overlay.style.display = 'flex';
         });
 
-        closeModal.addEventListener('click', () => {
-            modalOverlay.style.display = "none";
-            finalAnswer.value = "";
-            finalResult.textContent = "";
+        closeBtn.addEventListener('click', () => {
+            overlay.style.display = 'none';
         });
 
-        submitFinal.addEventListener('click', () => {
-            const answer = finalAnswer.value.trim();
-            if (answer === correctPassword) {
-                finalResult.textContent = "🎉 Correct! Unlocking your surprise...";
-                finalResult.className = "result correct";
-                setTimeout(() => window.location.href = "final.html", 1500);
+        submitBtn.addEventListener('click', () => {
+            const answer = document.getElementById('finalAnswerInput').value.trim();
+            if (answer === "happybirthdaytoyou") {
+                setTimeout(alert("CORRECT!!"),1500);
+                windiow.location.href = "final.html";
             } else {
-                finalResult.textContent = "❌ Nope... Try again!";
-                finalResult.className = "result wrong";
+                alert("Wrong answer 😢");
             }
+            overlay.style.display = 'none';
         });
 
-        finalAnswer.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') submitFinal.click();
-        });
+
     </script>
 </body>
 </html>
