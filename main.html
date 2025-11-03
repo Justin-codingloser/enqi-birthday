@@ -15,15 +15,29 @@
     <h1>🎈 Welcome to the Birthday Fun!🎉</h1>
     <p>答對3個小問題並解出金鑰 解鎖最後的生日祝福!</p>
 
-    <div class="eggs">
-      <img src="assets/images/egg1.png" class="egg" id="egg1">
-      <img src="assets/images/egg2.png" class="egg" id="egg2">
-      <img src="assets/images/egg3.png" class="egg" id="egg3">
+        <div class="eggs">
+        <img src="assets/images/egg1.png" class="egg" id="egg1">
+        <img src="assets/images/egg2.png" class="egg" id="egg2">
+        <img src="assets/images/egg3.png" class="egg" id="egg3">
+        </div>
+
     </div>
 
-  </div>
+    <div>
+        <button id="final">Check the final answer</button>
+    </div>
 
     </main>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="close-btn" id="closeModal">&times;</button>
+            <h2>輸入你的最終解答 🔍</h2>
+            <input type="text" id="finalAnswer" placeholder="輸入密碼..." />
+            <button id="submitFinal">Submit</button>
+            <p id="finalResult" class="result"></p>
+        </div>
+    </div>
         
     <script>
         const egg1 = document.getElementById('egg1');
@@ -40,6 +54,35 @@
         egg3.addEventListener('click', () => {
             setTimeout(alert("Question 3!"),1500);
             window.location.href = "egg3.html";
+        });
+
+        const correctPassword = "happybirthdaytoyou";
+
+        finalBtn.addEventListener('click', () => {
+            modalOverlay.style.display = "flex";
+            finalAnswer.focus();
+        });
+
+        closeModal.addEventListener('click', () => {
+            modalOverlay.style.display = "none";
+            finalAnswer.value = "";
+            finalResult.textContent = "";
+        });
+
+        submitFinal.addEventListener('click', () => {
+            const answer = finalAnswer.value.trim();
+            if (answer === correctPassword) {
+                finalResult.textContent = "🎉 Correct! Unlocking your surprise...";
+                finalResult.className = "result correct";
+                setTimeout(() => window.location.href = "final.html", 1500);
+            } else {
+                finalResult.textContent = "❌ Nope... Try again!";
+                finalResult.className = "result wrong";
+            }
+        });
+
+        finalAnswer.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') submitFinal.click();
         });
     </script>
 </body>
