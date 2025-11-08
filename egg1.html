@@ -53,11 +53,11 @@
         const cat = document.createElement('img');
 
         // 隨機選一張貓咪圖（假設你有 cat1.png, cat2.png, cat3.png）
-        const catIndex = Math.floor(Math.random() * 3) + 1;
+        const catIndex = Math.floor(Math.random() * 15) + 1;
         cat.src = `assets/images/cat${catIndex}.png`;
 
         // 隨機縮放比例 (0.5x ~ 1x)
-        const scale = 0.5 + Math.random() * 0.5;
+        const scale = 1.2 + Math.random() * 0.5;
         cat.style.transform = `scale(${scale})`;
 
         cat.animate(
