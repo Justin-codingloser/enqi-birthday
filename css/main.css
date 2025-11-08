@@ -230,3 +230,12 @@ p {
     transform: scale(1.08);
     box-shadow: 0 8px 20px rgba(255, 64, 129, 0.4);
 }
+
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* 防止橫向滾動 */
+    box-sizing: border-box;
+}
+.container {
+    margin: 0 auto; /* 強制水平置中 */
+}
