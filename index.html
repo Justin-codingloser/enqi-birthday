@@ -41,6 +41,50 @@
         } else {
             console.warn('Submit button not found');
         }
+
+        // 監聽整個畫面被點擊
+        document.addEventListener('click', (event) => {
+        // 建立 img 元素
+        const cat = document.createElement('img');
+
+        // 隨機選一張貓咪圖（假設你有 cat1.png, cat2.png, cat3.png）
+        const catIndex = Math.floor(Math.random() * 15) + 1;
+        cat.src = `assets/images/cat${catIndex}.png`;
+
+        // 隨機縮放比例 (0.5x ~ 1x)
+        const scale = 1.2 + Math.random() * 0.5;
+        cat.style.transform = `scale(${scale})`;
+
+        cat.animate(
+        [
+            { transform: `scale(0)`, opacity: 0 },
+            { transform: `scale(${scale})`, opacity: 1 }
+        ],
+        {
+            duration: 500,
+            easing: "ease-out"
+        }
+        );
+
+        // 設定位置
+        cat.style.position = 'absolute';
+        cat.style.left = `${event.clientX - 50}px`; // 讓圖片中心對準點擊處
+        cat.style.top = `${event.clientY - 50}px`;
+        cat.style.width = '100px';
+        cat.style.pointerEvents = 'none'; // 不影響後續點擊
+        cat.style.transition = 'opacity 1s ease';
+        cat.style.zIndex = '999';
+
+        // 加入畫面
+        document.body.appendChild(cat);
+
+        // 2秒後淡出並移除
+        setTimeout(() => {
+            cat.style.opacity = '0';
+            setTimeout(() => cat.remove(), 1000);
+        }, 1500);
+        });
+        
     </script>
 </body>
 </html>
