@@ -131,6 +131,7 @@
 <body>
   <canvas id="fireworks"></canvas>
   <h1>ㄚㄚㄚㄚㄚ生日快樂ㄧㄚ🎂🎊🎁</h1>
+  <audio id="bg-music" src="assets/music/bgm.mp3" autoplay loop></audio>
 
 <div class="lyrics-container">
   <div class="lyrics" id="lyrics">
@@ -265,7 +266,7 @@ const lines = lyrics.querySelectorAll("p");
 let currentLine = 0;
 
 // Scroll interval in milliseconds
-const interval = 1150; // 2 seconds per line
+const interval = 1250; // 2 seconds per line
 
 // Initialize: make first line visible and active on page load
 lines[0].classList.add("active");
