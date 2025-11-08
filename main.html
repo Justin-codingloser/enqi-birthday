@@ -23,10 +23,10 @@
 
     </div>
 
+    <button id="finalAnswerBtn">Enter Final Answer</button>
 
     </main>
 
-    <button id="finalAnswerBtn">Enter Final Answer</button>
 
 <div class="final-answer-overlay" id="finalAnswerOverlay">
     <div class="final-answer-box">
@@ -56,7 +56,7 @@
             window.location.href = "egg3.html";
         });
 
-        const correctPassword = "happybirthdaytoyou";
+        const correctPassword = "H3ll0_W0r1d!";
 
     
         const overlay = document.getElementById('finalAnswerOverlay');
@@ -74,7 +74,7 @@
 
         submitBtn.addEventListener('click', () => {
             const answer = document.getElementById('finalAnswerInput').value.trim();
-            if (answer === "happybirthdaytoyou") {
+            if (answer === "H3ll0_W0r1d!") {
                 setTimeout(alert("CORRECT!!"),1500);
                 windiow.location.href = "final.html";
             } else {

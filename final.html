@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fireworks Background</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #1e90ff, #32cd32);
+    overflow: hidden;
+    position: relative;
+  }
+
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1; /* keeps fireworks behind everything */
+  }
+
+  h1 {
+    text-align: center;
+    color: white;
+    margin: 0;
+    padding: 2rem 1rem;
+    font-family: Arial, sans-serif;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    position: relative;
+    z-index: 1;
+  }
+  p {
+    text-align: center;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+
+   .lyrics-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;            
+  max-width: 600px;       
+  height: 50vh;          
+  overflow: hidden;
+  text-align: center;
+  border-radius: 20px;
+  background: rgba(128, 128, 128, 0.3);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Lyrics styling */
+.lyrics {
+  width: 100%;
+  overflow-y: auto;
+  height: 100%;
+  scroll-behavior: smooth;
+  /* Hide scrollbar but keep functionality */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.lyrics::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.lyrics p {
+  margin: 15px 0;
+  font-size: 1.2rem;
+  transition: color 0.3s, font-size 0.3s;
+  color: rgba(255, 255, 255, 0.2);
+  padding: 10px 0;
+}
+
+.lyrics p.active {
+  color: rgb(214, 54, 174);
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* Responsive text */
+@media (max-width: 768px) {
+  h1 {
+    padding: 1.5rem 1rem;
+    font-size: clamp(1.2rem, 4vw, 2rem);
+  }
+  
+  .lyrics p {
+    font-size: 1rem;
+  }
+  .lyrics p.active {
+    font-size: 1.3rem;
+  }
+  
+  .lyrics-container {
+    height: 45vh;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    padding: 1rem 0.5rem;
+    font-size: clamp(1rem, 4vw, 1.5rem);
+  }
+  
+  .lyrics p {
+    font-size: 0.9rem;
+  }
+  .lyrics p.active {
+    font-size: 1.1rem;
+  }
+  
+  .lyrics-container {
+    height: 40vh;
+    padding: 10px;
+    width: 95%;
+  }
+}
+
+
+</style>
+</head>
+<body>
+  <canvas id="fireworks"></canvas>
+  <h1>Welcome </h1>
+
+<div class="lyrics-container">
+  <div class="lyrics" id="lyrics">
+    <p>恭喜我們最可愛</p>
+    <p>最漂亮</p>
+    <p>最善解人意</p>
+    <p>最溫柔的淇淇咪</p>
+    <p>來到了生活在地球上的第15年ㄌㄚ</p>
+    <p>終於可以幫你同學買15+的票啦🤣</p>
+    <p>在你的生日</p>
+    <p>想跟你說</p>
+    <p>謝謝妳在我們認識的一年多來</p>
+    <p>這麼有耐心的回我訊息陪我聊天</p>
+    <p>也謝謝妳</p>
+    <p>願意聽我講這麼多的廢話</p>
+    <p>還有億點點的抱怨👉🏼👈🏼</p>
+    <p>你的諄諄教誨（？）我會聽的：）</p>
+    <p>相信自己 對自己的有信心點</p>
+    <p>科班什麼的 一定考得上的：））</p>
+    <p>為了自己的未來還有我們的賭約加油ㄅㄚ</p>
+    <p>願妳的生活越來越多采多姿</p>
+    <p>祝你和把拔馬麻的關係很好很好</p>
+    <p>生日禮物會晚幾天幾個禮拜（？）</p>
+    <p>或幾個月（？）</p>
+    <p>（對不起但我真的覺得我有可能會忘記或是沒空）</p>
+    <p>好啦 最重要的：）</p>
+    <p>㊗️生日快樂🎉</p>
+    <p>㊗️考進科班</p>
+    <p>㊗️電爛全校⚡️⚡️</p>
+    <p>㊗️一直可可愛愛漂漂亮亮</p>
+    <p>㊗️天天開心身體健康萬事如意平安喜樂幸福美滿事事順心</p>
+    <p>㊗️生日快樂🎉🎂🎊🎁</p>
+    <p>（因為很重要所以要講好多好多遍😁）</p>
+  </div>
+</div>
+
+  <script>
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
+    let w = canvas.width = window.innerWidth;
+    let h = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    });
+
+    const fireworks = [];
+
+    class Firework {
+      constructor() {
+        this.x = Math.random() * w;
+        this.y = h;
+        this.targetY = Math.random() * h / 2;
+        this.speed = 3 + Math.random() * 2;
+        this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
+        this.trail = [];
+      }
+
+      update() {
+        this.trail.push({ x: this.x, y: this.y });
+        if (this.trail.length > 8) this.trail.shift();
+        this.y -= this.speed;
+
+        if (this.y <= this.targetY) {
+          for (let i = 0; i < 30; i++) {
+            fireworks.push(new Particle(this.x, this.y, this.color));
+          }
+          this.dead = true;
+        }
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        for (const p of this.trail) ctx.lineTo(p.x, p.y);
+        ctx.strokeStyle = this.color;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+    }
+
+    class Particle {
+      constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * 6;
+        this.vy = (Math.random() - 0.5) * 6;
+        this.alpha = 1;
+        this.color = color;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.vy += 0.05;
+        this.alpha -= 0.02;
+        if (this.alpha <= 0) this.dead = true;
+      }
+
+      draw() {
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    function animate() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+      ctx.fillRect(0, 0, w, h);
+
+      if (Math.random() < 0.05) fireworks.push(new Firework());
+
+      for (let i = fireworks.length - 1; i >= 0; i--) {
+        const f = fireworks[i];
+        f.update?.();
+        f.draw?.();
+        if (f.dead) fireworks.splice(i, 1);
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+
+    const lyrics = document.getElementById("lyrics");
+const lines = lyrics.querySelectorAll("p");
+let currentLine = 0;
+
+// Scroll interval in milliseconds
+const interval = 1150; // 2 seconds per line
+
+// Initialize: make first line visible and active on page load
+lines[0].classList.add("active");
+lyrics.scrollTop = 0;
+
+function scrollLyrics() {
+  lines.forEach(line => line.classList.remove("active"));
+  lines[currentLine].classList.add("active");
+
+  // Scroll only the lyrics content, not the container
+  const lineOffset = lines[currentLine].offsetTop;
+  const containerHeight = lyrics.clientHeight;
+  const lineHeight = lines[currentLine].offsetHeight;
+  const scrollPosition = lineOffset - (containerHeight / 2) + (lineHeight / 2);
+  
+  lyrics.scrollTo({
+    top: scrollPosition,
+    behavior: "smooth"
+  });
+
+  currentLine++;
+  if (currentLine >= lines.length) {
+    currentLine = 0; // Loop from start
+  }
+}
+
+setInterval(scrollLyrics, interval);
+  </script>
+</body>
+</html>

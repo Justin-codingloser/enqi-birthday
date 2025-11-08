@@ -206,3 +206,27 @@ p {
 #answer-div button:hover {
     background: #ff4081;
 }
+
+/* 💖 外層的 Enter Final Answer 按鈕樣式 */
+#finalAnswerBtn {
+    background: linear-gradient(135deg, #ff99c8, #ff66a3);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 102, 163, 0.3);
+}
+
+#finalAnswerBtn:hover {
+    background: linear-gradient(135deg, #ff66a3, #ff4081);
+    transform: scale(1.08);
+    box-shadow: 0 8px 20px rgba(255, 64, 129, 0.4);
+}
