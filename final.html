@@ -85,6 +85,26 @@
   font-size: 1.5rem;
 }
 
+#startBtn {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #ff99c8, #ff66a3);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(255, 102, 163, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+
+
 /* Responsive text */
 @media (max-width: 768px) {
   h1 {
@@ -129,8 +149,11 @@
 </style>
 </head>
 <body>
-    <audio id="bg-music" src="assets/music/bgm.mp3" autoplay loop></audio>
+    <audio id="bg-music" src="assets/music/bgm.mp3" loop></audio>
     <canvas id="fireworks"></canvas>
+
+    <button id="startBtn">開始🎵</button>
+
     <h1>ㄚㄚㄚㄚㄚ生日快樂ㄧㄚ🎂🎊🎁</h1>
   
 
@@ -263,38 +286,53 @@
 
 
     const lyrics = document.getElementById("lyrics");
-const lines = lyrics.querySelectorAll("p");
-let currentLine = 0;
+    const lines = lyrics.querySelectorAll("p");
+    let currentLine = 0;
 
-// Scroll interval in milliseconds
-const interval = 1600; // 2 seconds per line
+    // Scroll interval in milliseconds
+    const interval = 1600; // 2 seconds per line
 
-// Initialize: make first line visible and active on page load
-lines[0].classList.add("active");
-lyrics.scrollTop = 0;
+    // Initialize: make first line visible and active on page load
+    lyrics.scrollTop = 0;
 
-function scrollLyrics() {
-  lines.forEach(line => line.classList.remove("active"));
-  lines[currentLine].classList.add("active");
+    const startBtn = document.getElementById('startBtn');
+    const bgMusic = document.getElementById('bg-music');
 
-  // Scroll only the lyrics content, not the container
-  const lineOffset = lines[currentLine].offsetTop;
-  const containerHeight = lyrics.clientHeight;
-  const lineHeight = lines[currentLine].offsetHeight;
-  const scrollPosition = lineOffset - (containerHeight / 2) + (lineHeight / 2);
-  
-  lyrics.scrollTo({
-    top: scrollPosition,
-    behavior: "smooth"
-  });
+    let lyricsInterval;
 
-  currentLine++;
-  if (currentLine >= lines.length) {
-    currentLine = 0; // Loop from start
-  }
-}
+    startBtn.addEventListener('click', () => {
+        // 播放音樂
+        bgMusic.volume = 0.6;
+        bgMusic.play().catch(err => console.log("播放失敗：", err));
 
-setInterval(scrollLyrics, interval);
+        // 按鈕消失
+        startBtn.style.display = 'none';
+
+        // 初始化第一行字幕
+        lines[0].classList.add("active");
+        lyrics.scrollTop = 0;
+
+        // 開始字幕滾動
+        lyricsInterval = setInterval(() => {
+            lines.forEach(line => line.classList.remove("active"));
+            lines[currentLine].classList.add("active");
+
+            const lineOffset = lines[currentLine].offsetTop;
+            const containerHeight = lyrics.clientHeight;
+            const lineHeight = lines[currentLine].offsetHeight;
+            const scrollPosition = lineOffset - (containerHeight / 2) + (lineHeight / 2);
+
+            lyrics.scrollTo({
+                top: scrollPosition,
+                behavior: "smooth"
+            });
+
+            currentLine++;
+            if (currentLine >= lines.length) {
+                currentLine = 0; // 循環播放
+            }
+        }, interval);
+    });
   </script>
 </body>
 </html>
